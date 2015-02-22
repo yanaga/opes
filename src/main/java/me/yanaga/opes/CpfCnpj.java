@@ -81,7 +81,7 @@ public class CpfCnpj implements Serializable, Formattable, Comparable<CpfCnpj> {
 
 	@Override
 	public String toString() {
-		return cpf.map(Cpf::toString).orElseGet(cnpj::toString);
+		return cpf.map(Cpf::toString).orElseGet(() -> cnpj.map(Cnpj::toString).get());
 	}
 
 	@Override

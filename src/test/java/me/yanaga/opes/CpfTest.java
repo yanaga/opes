@@ -23,9 +23,7 @@ package me.yanaga.opes;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CpfTest {
 
@@ -55,7 +53,7 @@ public class CpfTest {
 
 	@Test(dataProvider = "cpfsValidos")
 	public void testOfValid(String s) {
-		assertNotNull(Cpf.of(s));
+		assertThat(Cpf.of(s)).isNotNull();
 	}
 
 	@Test(dataProvider = "cpfsInvalidos", expectedExceptions = IllegalArgumentException.class)
@@ -85,30 +83,30 @@ public class CpfTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("18530249100", Cpf.of("18530249100").toString());
-		assertEquals("29727693172", Cpf.of("29727693172").toString());
+		assertThat(Cpf.of("18530249100").toString()).isEqualTo("18530249100");
+		assertThat(Cpf.of("29727693172").toString()).isEqualTo("29727693172");
 	}
 
 	@Test
 	public void testFormatTo() {
-		assertEquals("185.302.491-00", String.format("%s", Cpf.of("18530249100")));
-		assertEquals("297.276.931-72", String.format("%s", Cpf.of("29727693172")));
+		assertThat(String.format("%s", Cpf.of("18530249100"))).isEqualTo("185.302.491-00");
+		assertThat(String.format("%s", Cpf.of("29727693172"))).isEqualTo("297.276.931-72");
 	}
 
 	@Test
 	public void testFormatToAlternate() {
-		assertEquals("000018530249100", String.format("%#15s", Cpf.of("18530249100")));
+		assertThat(String.format("%#15s", Cpf.of("18530249100"))).isEqualTo("000018530249100");
 	}
 
 	@Test
 	public void testEquals() {
-		assertEquals(Cpf.of("18530249100"), Cpf.of("18530249100"));
+		assertThat(Cpf.of("18530249100")).isEqualTo(Cpf.of("18530249100"));
 	}
 
 	@Test
 	public void testCompareTo() {
-		assertTrue(Cpf.of("29727693172").compareTo(Cpf.of("18530249100")) > 0);
-		assertTrue(Cpf.of("29727693172").compareTo(Cpf.of("29727693172")) == 0);
+		assertThat(Cpf.of("29727693172").compareTo(Cpf.of("18530249100")) > 0).isTrue();
+		assertThat(Cpf.of("29727693172").compareTo(Cpf.of("29727693172")) == 0).isTrue();
 	}
 
 }

@@ -23,8 +23,7 @@ package me.yanaga.opes;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CnsTest {
 
@@ -57,23 +56,23 @@ public class CnsTest {
 
 	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void testOfDefinitivoInvalido() {
-		assertNotNull(Cns.of("190129759240017"));
+		assertThat(Cns.of("190129759240017")).isNotNull();
 	}
 
 	@Test(expectedExceptions = IllegalArgumentException.class)
 	public void testOfProvisorioInvalido() {
-		assertNotNull(Cns.of("190129759240015"));
+		assertThat(Cns.of("190129759240015")).isNotNull();
 	}
 
 	@Test
 	public void testFormatTo() {
-		assertEquals("190 1297 5924 0018", String.format("%s", Cns.of("190129759240018")));
-		assertEquals("898 0010 3895 4985", String.format("%s", Cns.of("898001038954985")));
+		assertThat(String.format("%s", Cns.of("190129759240018"))).isEqualTo("190 1297 5924 0018");
+		assertThat(String.format("%s", Cns.of("898001038954985"))).isEqualTo("898 0010 3895 4985");
 	}
 
 	@Test
 	public void testFormatToAlternate() {
-		assertEquals("00000190129759240018", String.format("%#20s", Cns.of("190129759240018")));
+		assertThat(String.format("%#20s", Cns.of("190129759240018"))).isEqualTo("00000190129759240018");
 	}
 
 }

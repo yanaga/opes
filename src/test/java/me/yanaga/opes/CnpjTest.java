@@ -23,9 +23,7 @@ package me.yanaga.opes;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CnpjTest {
 
@@ -56,7 +54,7 @@ public class CnpjTest {
 
 	@Test(dataProvider = "cnpjsValidos")
 	public void testOfValid(String s) {
-		assertNotNull(Cnpj.of(s));
+		assertThat(Cnpj.of(s)).isNotNull();
 	}
 
 	@Test(dataProvider = "cnpjsInvalidos", expectedExceptions = IllegalArgumentException.class)
@@ -86,28 +84,28 @@ public class CnpjTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("19861350000170", Cnpj.of("19861350000170").toString());
+		assertThat(Cnpj.of("19861350000170").toString()).isEqualTo("19861350000170");
 	}
 
 	@Test
 	public void testFormatTo() {
-		assertEquals("19.861.350/0001-70", String.format("%s", Cnpj.of("19861350000170")));
+		assertThat(String.format("%s", Cnpj.of("19861350000170"))).isEqualTo("19.861.350/0001-70");
 	}
 
 	@Test
 	public void testFormatToAlternate() {
-		assertEquals("019861350000170", String.format("%#15s", Cnpj.of("19861350000170")));
+		assertThat(String.format("%#15s", Cnpj.of("19861350000170"))).isEqualTo("019861350000170");
 	}
 
 	@Test
 	public void testEquals() {
-		assertEquals(Cnpj.of("19861350000170"), Cnpj.of("19.861.350/0001-70"));
+		assertThat(Cnpj.of("19.861.350/0001-70")).isEqualTo(Cnpj.of("19861350000170"));
 	}
 
 	@Test
 	public void testCompareTo() {
-		assertTrue(Cnpj.of("23144170000145").compareTo(Cnpj.of("19861350000170")) > 0);
-		assertTrue(Cnpj.of("19861350000170").compareTo(Cnpj.of("19861350000170")) == 0);
+		assertThat(Cnpj.of("23144170000145").compareTo(Cnpj.of("19861350000170")) > 0).isTrue();
+		assertThat(Cnpj.of("19861350000170").compareTo(Cnpj.of("19861350000170")) == 0).isTrue();
 	}
 
 }

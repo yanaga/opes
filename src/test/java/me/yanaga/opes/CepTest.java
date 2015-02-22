@@ -23,18 +23,15 @@ package me.yanaga.opes;
 import com.google.common.collect.Range;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CepTest {
 
 	@Test
 	public void testOf() {
 		Cep cep = Cep.of("87030-020");
-		assertNotNull(cep);
-		assertEquals("87030020", cep.toString());
+		assertThat(cep).isNotNull();
+		assertThat(cep.toString()).isEqualTo("87030020");
 	}
 
 	@Test(expectedExceptions = IllegalArgumentException.class)
@@ -45,26 +42,26 @@ public class CepTest {
 	@Test
 	public void testFormatToAlternate() {
 		Cep cep = Cep.of("87030-020");
-		assertEquals("87030020", String.format("%#s", cep));
+		assertThat(String.format("%#s", cep)).isEqualTo("87030020");
 	}
 
 	@Test
 	public void testFormatTo() {
 		Cep cep = Cep.of("87030-020");
-		assertEquals("87030-020", String.format("%s", cep));
+		assertThat(String.format("%s", cep)).isEqualTo("87030-020");
 	}
 
 	@Test
 	public void testCompareTo() {
 		Cep inicio = Cep.of("80000000");
 		Cep termino = Cep.of("87999999");
-		assertTrue(inicio.compareTo(termino) < 0);
-		assertTrue(termino.compareTo(inicio) > 0);
-		assertTrue(inicio.compareTo(inicio) == 0);
+		assertThat(inicio.compareTo(termino) < 0).isTrue();
+		assertThat(termino.compareTo(inicio) > 0).isTrue();
+		assertThat(inicio.compareTo(inicio) == 0).isTrue();
 
-		assertTrue(Range.closed(inicio, termino).contains(Cep.of("87030020")));
-		assertFalse(Range.closed(inicio, termino).contains(Cep.of("88000000")));
-		assertFalse(Range.closed(inicio, termino).contains(Cep.of("79999999")));
+		assertThat(Range.closed(inicio, termino).contains(Cep.of("87030020"))).isTrue();
+		assertThat(Range.closed(inicio, termino).contains(Cep.of("88000000"))).isFalse();
+		assertThat(Range.closed(inicio, termino).contains(Cep.of("79999999"))).isFalse();
 	}
 
 }

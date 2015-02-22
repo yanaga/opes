@@ -22,16 +22,15 @@ package me.yanaga.opes;
 
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class EmailTest {
 
 	@Test
 	public void testOf() {
-		assertNotNull(Email.of("edson@yanaga.yanaga"));
-		assertNotNull(Email.of("teste.domain@yanaga.me"));
-		assertNotNull(Email.of("user123_321@yanaga.me"));
+		assertThat(Email.of("edson@yanaga.yanaga")).isNotNull();
+		assertThat(Email.of("teste.domain@yanaga.me")).isNotNull();
+		assertThat(Email.of("user123_321@yanaga.me")).isNotNull();
 	}
 
 	@Test(expectedExceptions = IllegalArgumentException.class)
@@ -51,7 +50,7 @@ public class EmailTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("edson@yanaga.yanaga", Email.of("edson@yanaga.yanaga").toString());
+		assertThat(Email.of("edson@yanaga.yanaga").toString()).isEqualTo("edson@yanaga.yanaga");
 	}
 
 }

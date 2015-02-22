@@ -29,20 +29,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
 
 public class CpfCnpjTest {
 
 	@Test(dataProviderClass = CpfTest.class, dataProvider = "cpfsValidos")
 	public void testFromValidCpfs(String s) {
-		assertNotNull(CpfCnpj.of(s));
+		assertThat(CpfCnpj.of(s)).isNotNull();
 	}
 
 	@Test(dataProviderClass = CnpjTest.class, dataProvider = "cnpjsValidos")
 	public void testFromValidCnpjs(String s) {
-		assertNotNull(CpfCnpj.of(s));
+		assertThat(CpfCnpj.of(s)).isNotNull();
 	}
 
 	@Test(dataProviderClass = CpfTest.class, dataProvider = "cpfsInvalidos", expectedExceptions = IllegalArgumentException.class)
@@ -72,15 +69,33 @@ public class CpfCnpjTest {
 
 	@Test
 	public void testEquals() {
-		assertEquals(CpfCnpj.of("18530249100"), CpfCnpj.of("18530249100"));
+		assertThat(CpfCnpj.of("18530249100")).isEqualTo(CpfCnpj.of("18530249100"));
+	}
+
+	@Test
+	public void testToString() {
+		assertThat(CpfCnpj.of("29727693172").toString()).isEqualTo("29727693172");
+		assertThat(CpfCnpj.of("19861350000170").toString()).isEqualTo("19861350000170");
+	}
+
+	@Test
+	public void testFormatTo() {
+		assertThat(String.format("%s", CpfCnpj.of("29727693172"))).isEqualTo("297.276.931-72");
+		assertThat(String.format("%s", CpfCnpj.of("19861350000170"))).isEqualTo("19.861.350/0001-70");
+	}
+
+	@Test
+	public void testFormatToAlternate() {
+		assertThat(String.format("%#15s", CpfCnpj.of("29727693172"))).isEqualTo("000029727693172");
+		assertThat(String.format("%#20s", CpfCnpj.of("19861350000170"))).isEqualTo("00000019861350000170");
 	}
 
 	@Test
 	public void testCompareTo() {
-		assertTrue(CpfCnpj.of("29727693172").compareTo(CpfCnpj.of("18530249100")) > 0);
-		assertTrue(CpfCnpj.of("18530249100").compareTo(CpfCnpj.of("29727693172")) < 0);
-		assertTrue(CpfCnpj.of("18530249100").compareTo(CpfCnpj.of("18530249100")) == 0);
-		assertTrue(CpfCnpj.of("19861350000170").compareTo(CpfCnpj.of("00881753000153")) > 0);
+		assertThat(CpfCnpj.of("29727693172").compareTo(CpfCnpj.of("18530249100")) > 0).isTrue();
+		assertThat(CpfCnpj.of("18530249100").compareTo(CpfCnpj.of("29727693172")) < 0).isTrue();
+		assertThat(CpfCnpj.of("18530249100").compareTo(CpfCnpj.of("18530249100")) == 0).isTrue();
+		assertThat(CpfCnpj.of("19861350000170").compareTo(CpfCnpj.of("00881753000153")) > 0).isTrue();
 	}
 
 	@Test
