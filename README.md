@@ -9,7 +9,7 @@ We are constantly solving the same problems again and again in every project tha
 
 We currently have implementations for CPF, CNPJ, CPF/CNPJ, CEP, CNS, Email and Uf.
 
-**opes** is available on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22opes%22).
+**opes** is available on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22opes%22), and requires at least **Java 8**.
 
 You can add this dependency to your Maven project:
 
@@ -37,7 +37,7 @@ O **opes** é uma tentativa de ajudar desenvolvedores no Brasil a focar em probl
 
 Atualmente temos implementações para CPF, CNPJ, CPF/CNPJ, CEP, CNS, Email e Uf. Mas a lista continua crescendo.
 
-O **opes** está disponível no [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22opes%22).
+O **opes** está disponível no [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22opes%22), e requer no mínimo **Java 8**.
 
 Você pode utilizar esta dependência do Maven em seu projeto:
 
