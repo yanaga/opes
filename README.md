@@ -31,7 +31,7 @@ compile "me.yanaga:opes:1.0.1"
 
 Value Objects (VO)s para casos de uso comuns no Brasil.
 
-Nós estamos constantemente resolvendo os mesmos problemas em cada projeto que utiliza um modelo de negócios comum. No Brasil nós temos algumas abstrações que simplesmente são utilizadas em todo lugar. Todo desenvolvedor acaba tendo (ou ao menos deveria ter) uma implementação própria de CPF, CNPJ, CEP etc.
+Nós estamos constantemente resolvendo os mesmos problemas em cada projeto que utiliza um modelo de negócios comum. No Brasil temos algumas abstrações que simplesmente são utilizadas em todo lugar. Todo desenvolvedor acaba tendo (ou ao menos deveria ter) uma implementação própria de CPF, CNPJ, CEP etc.
 
 O **opes** é uma tentativa de ajudar desenvolvedores no Brasil a focar em problemas mais importantes, ao invés de perder tempo implementando esse tipo de código mais uma vez. O **opes** é testado e utilizado em produção em vários projetos, e temos a esperança de que ele poderá ajudar e será utilizado em seu próximo projeto também.
 
