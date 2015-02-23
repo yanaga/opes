@@ -7,7 +7,7 @@ We are constantly solving the same problems again and again in every project tha
 
 **opes** is an attempt to aid developers in Brazil to focus on more important problems, rather than implementing this kind of code one more time. **opes** is tested and used in production code in many projects, and hopefully will be in your project from now on.
 
-We currently have implementations for CPF, CNPJ, CPF/CNPJ, CEP and CNS.
+We currently have implementations for CPF, CNPJ, CPF/CNPJ, CEP, CNS, Email and Uf.
 
 **opes** is available on [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22opes%22).
 
@@ -35,7 +35,7 @@ Nós estamos constantemente resolvendo os mesmos problemas em cada projeto que u
 
 O **opes** é uma tentativa de ajudar desenvolvedores no Brasil a focar em problemas mais importantes, ao invés de perder tempo implementando esse tipo de código mais uma vez. O **opes** é testado e utilizado em produção em vários projetos, e temos a esperança de que ele poderá ajudar e será utilizado em seu próximo projeto também.
 
-Atualmente temos implementações para CPF, CNPJ, CPF/CNPJ, CEP e CNS. Mas a lista continua crescendo.
+Atualmente temos implementações para CPF, CNPJ, CPF/CNPJ, CEP, CNS, Email e Uf. Mas a lista continua crescendo.
 
 O **opes** está disponível no [Maven Central](http://search.maven.org/#search%7Cga%7C1%7Ca%3A%22opes%22).
 
