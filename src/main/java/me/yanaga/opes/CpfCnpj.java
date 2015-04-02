@@ -62,7 +62,7 @@ public class CpfCnpj implements Serializable, Formattable, Comparable<CpfCnpj> {
 		else if (digits.matches("\\d{14}")) {
 			return new CpfCnpj(Cnpj.of(digits));
 		}
-		throw new IllegalArgumentException(String.format("CPF/CNPJ inv\u00e1lido: %value.", value));
+		throw new IllegalArgumentException(String.format("CPF/CNPJ inv\u00e1lido: %s.", value));
 	}
 
 	@Override
