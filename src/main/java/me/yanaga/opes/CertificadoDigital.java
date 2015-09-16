@@ -9,9 +9,9 @@ package me.yanaga.opes;
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -65,6 +65,7 @@ import java.security.PublicKey;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateParsingException;
 import java.security.cert.X509Certificate;
+import java.time.Instant;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -89,13 +90,16 @@ public final class CertificadoDigital implements Serializable {
 
 	private final transient CpfCnpj cnpj;
 
+	private final Instant expiry;
+
 	private final transient PrivateKey privateKey;
 
 	private final transient X509Certificate[] certificateChain;
 
-	private CertificadoDigital(byte[] bytes, CpfCnpj cpfCnpj, PrivateKey privateKey, X509Certificate[] certificateChain) {
+	private CertificadoDigital(byte[] bytes, CpfCnpj cpfCnpj, Instant expiry, PrivateKey privateKey, X509Certificate[] certificateChain) {
 		this.bytes = bytes;
 		this.cnpj = cpfCnpj;
+		this.expiry = expiry;
 		this.privateKey = privateKey;
 		this.certificateChain = certificateChain;
 
@@ -128,11 +132,12 @@ public final class CertificadoDigital implements Serializable {
 					System.arraycopy(certs, 0, tmp, 0, certs.length);
 					certs = tmp;
 				}
+				Instant expiry = ((X509Certificate) certs[0]).getNotAfter().toInstant();
 
 				ByteArrayOutputStream baos = new ByteArrayOutputStream();
 				keyStore.store(baos, DEFAULT_CERTIFICATE_PASSWORD);
 
-				return new CertificadoDigital(baos.toByteArray(), extractCnpj(certs), (PrivateKey) key, (X509Certificate[]) certs);
+				return new CertificadoDigital(baos.toByteArray(), extractCnpj(certs), expiry, (PrivateKey) key, (X509Certificate[]) certs);
 			}
 			throw new IllegalArgumentException("Unable to load PrivateKey and CertificateChain from KeyStore.");
 		}
@@ -147,6 +152,10 @@ public final class CertificadoDigital implements Serializable {
 
 	public Optional<CpfCnpj> getCnpj() {
 		return Optional.ofNullable(cnpj);
+	}
+
+	public Instant getExpiry() {
+		return expiry;
 	}
 
 	public <T extends Node> T sign(T node) {
